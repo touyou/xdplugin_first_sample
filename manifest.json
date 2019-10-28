@@ -32,6 +32,11 @@
       "label": "Create Pie Chart",
       "type": "menu",
       "commandId": "createPieChartCommand"
+    },
+    {
+      "label": "Create Styled Text",
+      "type": "menu",
+      "commandId": "createStyledTextCommand"
     }
   ],
   "version": "0.0.1"

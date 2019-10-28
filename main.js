@@ -5,7 +5,7 @@
  */
 
 
-const { Line, Rectangle, Path, Color } = require("scenegraph");
+const { Line, Rectangle, Path, Text, Color } = require("scenegraph");
 const commands = require("commands");
 
 // MARK: Helper
@@ -90,10 +90,37 @@ function createPieChartCommand(selection) {
     createWedge(selection, 100, 225, 360, "purple");
 }
 
+// MARK: Styled Text
+
+function createStyledTextHandlerFunction(selection) {
+    const node = new Text();
+
+    const textData = [
+        { text: "This ", color: "red" },
+        { text: "is ", color: "orange" },
+        { text: "some ", color: "yellow" },
+        { text: "ra", color: "green" },
+        { text: "in", color: "blue" },
+        { text: "bow ", color: "indigo" },
+        { text: "text", color: "violet" },
+    ];
+
+    node.text = textData.map(item => item.text).join("");
+    node.styleRanges = textData.map(item => ({
+        length: item.text.length,
+        fill: new Color(item.color)
+    }));
+    node.fontSize = 24;
+
+    selection.insertionParent.addChild(node);
+    node.moveInParentCoordinates(20, 50);
+}
+
 module.exports = {
     commands: {
         createRectangle: rectangleHandlerFunction,
         createLinesCommand,
-        createPieChartCommand
+        createPieChartCommand,
+        "createStyledTextCommand": createStyledTextHandlerFunction
     }
 };
